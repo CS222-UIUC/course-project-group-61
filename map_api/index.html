@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+    
+    <div id="map" style="width: 1000px; height: 1000px;"></div>
+  </head>
+  <body>
+    <div id="map" style="width: 600px; height: 400px;"></div>
+    <div id="popup" class="ol-popup">
+      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+      <div id="popup-content"></div>
+      <div id="popup" class="ol-popup"></div>
+  </div>
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+    <script >
+      var attribution = new ol.control.Attribution({
+     collapsible: false
+ });
+
+ var map = new ol.Map({
+  target: 'map',
+  layers: [
+      new ol.layer.Tile({
+        source: new ol.source.OSM()
+      })
+    ],
+  view: new ol.View({
+    center: ol.proj.fromLonLat([-88.23039602144641, 40.10977826626554]),
+    zoom: 14,
+    minZoom: 0,
+    maxZoom: 18
+  })
+});
+
+ var layer = new ol.layer.Vector({
+     source: new ol.source.Vector({
+         features: [
+             new ol.Feature({
+                 geometry: new ol.geom.Point(ol.proj.fromLonLat([-88.23039602144641, 40.10977826626554])), //708 S Sixth St
+             }),
+             new ol.Feature({
+                 geometry: new ol.geom.Point(ol.proj.fromLonLat([-88.21522727364429, 40.11342038154843])) // 606 Stoughton St
+             }), 
+             new ol.Feature({
+                 geometry: new ol.geom.Point(ol.proj.fromLonLat([-88.23705204565394, 40.11024852053809])) // 2nd & Green St
+             }), 
+             new ol.Feature({
+                 geometry: new ol.geom.Point(ol.proj.fromLonLat([-88.23556707618816, 40.110113820823365])) //The Red Lion
+             })
+         ]
+     })
+ });
+ map.addLayer(layer);
+  </script>
+  </body>
+
+</html>
