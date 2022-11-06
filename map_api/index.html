@@ -33,24 +33,124 @@
   })
 });
 
+ var marker;
+ var marker1;
+ var marker2;
+ var marker3;
+ var testingText = new ol.style.Style({
+    image: new ol.style.Icon({
+        anchor: [.5, 1],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'fraction',
+        opacity: 1,
+        scale: 0.1,
+        src: '../marker.png'
+    }),
+    text: new ol.style.Text({
+        text: "708 S Sixth St",
+        scale: 1.2,
+        fill: new ol.style.Fill({
+          color: "#fff"
+        }),
+        stroke: new ol.style.Stroke({
+          color: "0",
+          width: 3
+        })
+      })
+  });
+
  var layer = new ol.layer.Vector({
      source: new ol.source.Vector({
          features: [
-             new ol.Feature({
+             marker = new ol.Feature({
                  geometry: new ol.geom.Point(ol.proj.fromLonLat([-88.23039602144641, 40.10977826626554])), //708 S Sixth St
              }),
-             new ol.Feature({
+             marker1 = new ol.Feature({
                  geometry: new ol.geom.Point(ol.proj.fromLonLat([-88.21522727364429, 40.11342038154843])) // 606 Stoughton St
              }), 
-             new ol.Feature({
+             marker2 = new ol.Feature({
                  geometry: new ol.geom.Point(ol.proj.fromLonLat([-88.23705204565394, 40.11024852053809])) // 2nd & Green St
              }), 
-             new ol.Feature({
+             marker3 = new ol.Feature({
                  geometry: new ol.geom.Point(ol.proj.fromLonLat([-88.23556707618816, 40.110113820823365])) //The Red Lion
              })
          ]
      })
  });
+ marker.setStyle(testingText);
+
+ testingText = new ol.style.Style({
+    image: new ol.style.Icon({
+        anchor: [.5, 1],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'fraction',
+        opacity: 1,
+        scale: 0.1,
+        src: '../marker.png'
+    }),
+    text: new ol.style.Text({
+        text: "606 Stoughton St",
+        scale: 1.2,
+        fill: new ol.style.Fill({
+          color: "#fff"
+        }),
+        stroke: new ol.style.Stroke({
+          color: "0",
+          width: 3
+        })
+      })
+  });
+
+ marker1.setStyle(testingText);
+
+ testingText = new ol.style.Style({
+    image: new ol.style.Icon({
+        anchor: [.5, 1],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'fraction',
+        opacity: 1,
+        scale: 0.1,
+        src: '../marker.png'
+    }),
+    text: new ol.style.Text({
+        text: "Second & Green St",
+        scale: 1.2,
+        fill: new ol.style.Fill({
+          color: "#fff"
+        }),
+        stroke: new ol.style.Stroke({
+          color: "0",
+          width: 3
+        })
+      })
+  });
+
+ marker2.setStyle(testingText);
+
+ testingText = new ol.style.Style({
+    image: new ol.style.Icon({
+        anchor: [.5, 1],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'fraction',
+        opacity: 1,
+        scale: 0.1,
+        src: '../marker.png'
+    }),
+    text: new ol.style.Text({
+        text: "The Red Lion",
+        scale: 1.2,
+        fill: new ol.style.Fill({
+          color: "#fff"
+        }),
+        stroke: new ol.style.Stroke({
+          color: "0",
+          width: 3
+        })
+      })
+  });
+
+ marker3.setStyle(testingText);
+
  map.addLayer(layer);
   </script>
   </body>
