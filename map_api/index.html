@@ -15,143 +15,97 @@
     <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
     <script >
       var attribution = new ol.control.Attribution({
-     collapsible: false
- });
+        collapsible: false
+      });
 
- var map = new ol.Map({
-  target: 'map',
-  layers: [
-      new ol.layer.Tile({
+  var raster = new ol.layer.Tile({
         source: new ol.source.OSM()
-      })
-    ],
-  view: new ol.View({
-    center: ol.proj.fromLonLat([-88.23039602144641, 40.10977826626554]),
-    zoom: 14,
-    minZoom: 0,
-    maxZoom: 18
-  })
+    }),
+
+    vectorSource = new ol.source.Vector(),
+
+    json = [{ //temp json data
+        "latitude": 40.10977826626554,
+        "longitude": -88.23039602144641,
+        "street": "708 S Sixth St",
+    }, {
+        "latitude": 40.110113820823365,
+        "longitude": -88.23556707618816,
+        "street": "The Red Lion",
+    }, {
+      "latitude": 40.11342038154843,
+      "longitude": -88.21522727364429,
+      "street": "606 Stoughton St",
+    }, {
+      "latitude": 40.11024852053809,
+      "longitude": -88.23705204565394,
+      "street": "2nd & Green St",
+    }]
+
+var vectorPoints = new ol.layer.Vector({
+    source: vectorSource
 });
 
- var marker;
- var marker1;
- var marker2;
- var marker3;
- var testingText = new ol.style.Style({
-    image: new ol.style.Icon({
-        anchor: [.5, 1],
-        anchorXUnits: 'fraction',
-        anchorYUnits: 'fraction',
-        opacity: 1,
-        scale: 0.1,
-        src: '../marker.png'
-    }),
-    text: new ol.style.Text({
-        text: "708 S Sixth St",
-        scale: 1.2,
-        fill: new ol.style.Fill({
-          color: "#fff"
-        }),
-        stroke: new ol.style.Stroke({
-          color: "0",
-          width: 3
-        })
-      })
-  });
+const map = new ol.Map({
+    layers: [raster, vectorPoints],
+    target: 'map',
+    view: new ol.View({
+      center: ol.proj.fromLonLat([-88.23039602144641, 40.10977826626554]),
+      zoom: 14,
+      minZoom: 0,
+      maxZoom: 18
+    })
+});
 
- var layer = new ol.layer.Vector({
-     source: new ol.source.Vector({
-         features: [
-             marker = new ol.Feature({
-                 geometry: new ol.geom.Point(ol.proj.fromLonLat([-88.23039602144641, 40.10977826626554])), //708 S Sixth St
-             }),
-             marker1 = new ol.Feature({
-                 geometry: new ol.geom.Point(ol.proj.fromLonLat([-88.21522727364429, 40.11342038154843])) // 606 Stoughton St
-             }), 
-             marker2 = new ol.Feature({
-                 geometry: new ol.geom.Point(ol.proj.fromLonLat([-88.23705204565394, 40.11024852053809])) // 2nd & Green St
-             }), 
-             marker3 = new ol.Feature({
-                 geometry: new ol.geom.Point(ol.proj.fromLonLat([-88.23556707618816, 40.110113820823365])) //The Red Lion
-             })
-         ]
-     })
- });
- marker.setStyle(testingText);
 
- testingText = new ol.style.Style({
-    image: new ol.style.Icon({
-        anchor: [.5, 1],
-        anchorXUnits: 'fraction',
-        anchorYUnits: 'fraction',
-        opacity: 1,
-        scale: 0.1,
-        src: '../marker.png'
-    }),
-    text: new ol.style.Text({
-        text: "606 Stoughton St",
-        scale: 1.2,
-        fill: new ol.style.Fill({
-          color: "#fff"
-        }),
-        stroke: new ol.style.Stroke({
-          color: "0",
-          width: 3
-        })
-      })
-  });
+function addMarker(data) {
 
- marker1.setStyle(testingText);
+    var features = data.map(item => {
+        let longitude = item.longitude,
+            latitude = item.latitude,
+            iconFeature = new ol.Feature({
+                geometry: new ol.geom.Point(ol.proj.transform([longitude, latitude], 'EPSG:4326',
+                    'EPSG:3857')),
+                desc: item.street,
+            }),
+            iconStyle = new ol.style.Style({
+              image: new ol.style.Icon({
+              anchor: [.5, 1.2],
+              anchorXUnits: 'fraction',
+              anchorYUnits: 'fraction',
+              opacity: 1,
+              scale: 0.1,
+              src: '../marker.png'
+            }),
+                text: new ol.style.Text({
+                    text: item.street,
+                    scale: 1.2,
+                    fill: new ol.style.Fill({
+                      color: "#fff"
+                    }),
+                    stroke: new ol.style.Stroke({
+                      color: "0",
+                      width: 3
+                    })
+                })
+            });
 
- testingText = new ol.style.Style({
-    image: new ol.style.Icon({
-        anchor: [.5, 1],
-        anchorXUnits: 'fraction',
-        anchorYUnits: 'fraction',
-        opacity: 1,
-        scale: 0.1,
-        src: '../marker.png'
-    }),
-    text: new ol.style.Text({
-        text: "Second & Green St",
-        scale: 1.2,
-        fill: new ol.style.Fill({
-          color: "#fff"
-        }),
-        stroke: new ol.style.Stroke({
-          color: "0",
-          width: 3
-        })
-      })
-  });
+        iconFeature.setStyle(iconStyle);
+        return iconFeature;
+    });
 
- marker2.setStyle(testingText);
+    var vectorSource = new ol.source.Vector({
+        features: features
+    });
 
- testingText = new ol.style.Style({
-    image: new ol.style.Icon({
-        anchor: [.5, 1],
-        anchorXUnits: 'fraction',
-        anchorYUnits: 'fraction',
-        opacity: 1,
-        scale: 0.1,
-        src: '../marker.png'
-    }),
-    text: new ol.style.Text({
-        text: "The Red Lion",
-        scale: 1.2,
-        fill: new ol.style.Fill({
-          color: "#fff"
-        }),
-        stroke: new ol.style.Stroke({
-          color: "0",
-          width: 3
-        })
-      })
-  });
+    var vectorLayer = new ol.layer.Vector({
+        source: vectorSource
+    });
+    map.addLayer(vectorLayer);
 
- marker3.setStyle(testingText);
+}
 
- map.addLayer(layer);
+addMarker(json);
   </script>
   </body>
 
