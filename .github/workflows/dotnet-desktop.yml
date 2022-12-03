@@ -40,7 +40,8 @@ name: .NET Core Desktop
 
 on:
   push:
-    branches: [ "main" ]
+    paths:
+      - 'course-project-group-61/crimeMap/'
   pull_request:
     branches: [ "main" ]
 
