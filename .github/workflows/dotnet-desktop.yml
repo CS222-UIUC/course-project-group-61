@@ -42,6 +42,7 @@ on:
   push:
     paths:
       - 'course-project-group-61/crimeMap/'
+    branches: ["main"]
   pull_request:
     branches: [ "main" ]
 
