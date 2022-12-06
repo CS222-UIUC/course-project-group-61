@@ -22,6 +22,8 @@
         source: new ol.source.OSM()
     }),
 
+    
+
     vectorSource = new ol.source.Vector(),
     json = [{
         "date_occurred": "12/01/2019",
@@ -13667,7 +13669,6 @@ const map = new ol.Map({
 
 
 function addMarker(data) {
-
     var features = data.map(item => {
         let longitude = parseFloat(item.Longitude),
             latitude = parseFloat(item.Latitude),
@@ -13681,21 +13682,10 @@ function addMarker(data) {
               anchor: [.5, 1.2],
               anchorXUnits: 'fraction',
               anchorYUnits: 'fraction',
-              opacity: 1,
-              scale: 0.1,
-              src: './marker.png'
-            }),
-                text: new ol.style.Text({
-                    text: item.address_street,
-                    scale: 1.2,
-                    fill: new ol.style.Fill({
-                      color: "#fff"
-                    }),
-                    stroke: new ol.style.Stroke({
-                      color: "0",
-                      width: 3
-                    })
-                })
+              opacity: 0.5,
+              scale: 0.05,
+              src: './circle.png'
+            })
             });
 
         iconFeature.setStyle(iconStyle);
@@ -13710,6 +13700,36 @@ function addMarker(data) {
         source: vectorSource
     });
     map.addLayer(vectorLayer);
+    
+    var container = document.getElementById('popup');
+    var content = document.getElementById('popup-content');
+    var closer = document.getElementById('popup-closer');
+
+    var overlay = new ol.Overlay({
+        element: container,
+        autoPan: true,
+        autoPanAnimation: {
+            duration: 250
+        }
+    });
+    map.addOverlay(overlay);
+
+    closer.onclick = function() {
+        overlay.setPosition(undefined);
+        closer.blur();
+        return false;
+    };
+    map.on('singleclick', function (event) {
+     if (map.hasFeatureAtPixel(event.pixel) === true) {
+        var coordinate = event.coordinate;
+        var features = map.getFeaturesAtPixel(event.pixel);
+        content.innerHTML = features[0].getProperties().desc;
+        overlay.setPosition(coordinate);
+     } else {
+        overlay.setPosition(undefined);
+        closer.blur();
+     }
+ });
 
 }
 addMarker(json);
