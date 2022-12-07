@@ -37,7 +37,8 @@ Shaarav: Worked on the data preprocessing which included creating a heatmap, che
 
 Krushank: Worked on the Openlayers API and integrated the dataset from Jupyter Notebook into Openlayers. Added in opacity layering in the Openlayers map API to show users where a higher concentration of crime is occurring so they have a better understanding of the area around them.
 
-Michael:
+Michael: Worked in Jupyter Notebooks in Visual Studio to help clean the csv of any incomplete data points with Shaarav. Tried working in TensorFlow to create
+a predictive ML model to predict where crime was going to happen next in Champaign-Urbana but this ended up taking too much time to complete.
 
 
 
