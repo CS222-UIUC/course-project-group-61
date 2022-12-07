@@ -32,7 +32,8 @@ Group members and their roles
 
 Aadarsh: Worked on C# front end utilizing the .NET Framework in Visual Studio 2022. The frontend interacts with the Openlayers API and the internet to be able to pull recent crime data and to view all crime data in a single application. Also added in the ability to connect to Google Maps through our User Interface for convenient routing based on the safety of areas shown by our crime clustering.
 
-Shaarav: 
+Shaarav: Worked on the data preprocessing which included creating a heatmap, checking for the null values, and ensuring the dataset was accurate. Used Geopy to convert the given string mapping address into latitude and longitude coordinates, and wrote everything into a new csv to send to OpenLayers.
+
 
 Krushank: Worked on the Openlayers API and integrated the dataset from Jupyter Notebook into Openlayers. Added in opacity layering in the Openlayers map API to show users where a higher concentration of crime is occurring so they have a better understanding of the area around them.
 
