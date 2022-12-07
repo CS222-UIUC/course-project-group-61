@@ -30,7 +30,7 @@ Running only Openlayers API:
 
 Group members and their roles
 
-Aadarsh:
+Aadarsh: Worked on C# front end utilizing the .NET Framework in Visual Studio 2022. The frontend interacts with the Openlayers API and the internet to be able to pull recent crime data and to view all crime data in a single application. Also added in the ability to connect to Google Maps through our User Interface for convenient routing based on the safety of areas shown by our crime clustering.
 
 Shaarav: 
 
