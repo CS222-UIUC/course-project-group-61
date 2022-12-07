@@ -17,6 +17,7 @@ Openlayers -> Backend mapping technology used to display markers where crime occ
 
 (Provides reproducible installation instructions)
 Running Frontend with C#:
+The project contains a .exe file in the crimeMap subdirectory which is our final application. This exe launches the windows application and allows you to view all the crime data from openlayers. There is also a .msi file which acts as a custom installer.
 
 Running only Openlayers API:
 
