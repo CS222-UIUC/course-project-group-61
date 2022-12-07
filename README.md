@@ -6,7 +6,7 @@ csv data of the criminal data into latitude and longitude coordinates using GeoP
 
 
 
-(Describes technical architecture)
+Technical architecture:
 
 C# -> Frontend part of application, provides effective and easy functionality for user to see map, while also allowing for an easy way to launch the openlayers and application overall.
 
@@ -15,7 +15,7 @@ Jupyter Notebook -> Essential for cleaning and correcting the dataset we receive
 Openlayers -> Backend mapping technology used to display markers where crime occurred with location and name, interacted with Jupyter Notebook to receive the necessary data and convert to JSON, interacted with C# to be integrated into the frontend and be launched easily. Added in opacity layering in order to show users where a higher concentration of crime is occurring so they have a better understanding of the area around them.
 
 
-(Provides reproducible installation instructions)
+Reproducible installation instructions:
 
 Running Frontend with C#:
 
@@ -28,13 +28,13 @@ Running only Openlayers API:
 - run npm start
 - copy and past localhost url to view map
 
-(Group members and their roles)
+Group members and their roles
 
 Aadarsh:
 
 Shaarav: 
 
-Krushank:
+Krushank: Worked on the Openlayers API and integrated the dataset from Jupyter Notebook into Openlayers. Added in opacity layering in the Openlayers map API to show users where a higher concentration of crime is occurring so they have a better understanding of the area around them.
 
 Michael:
 
